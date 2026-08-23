@@ -7,6 +7,8 @@ import java.util.List;
 interface StudentDAO {
     void addStudent(Student s);
     List<Student> getAllStudent();
+    Student getStudentById(int id);
+    List<Student> searchByName(String name);
     void updateStudent(Student s);
     void deleteStudent(int id);
 }
