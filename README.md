@@ -1,44 +1,146 @@
-# Student Management System
+# Student Management System (JDBC)
 
-A Java console application built with JDBC and MySQL.
+A console-based, menu-driven **Student Management System** built using **Java**, **JDBC**, and **MySQL**.  
 
-## Project structure
+This project was created to practice JDBC concepts and follows the **DAO (Data Access Object)** design pattern with a layered architecture for clean code and separation of concerns.
+
+## Features
+
+- Add new student records
+- View all student records
+- Update existing student details
+- Delete student records
+- Search students by ID
+- Search students by name using pattern matching
+- Sort students by marks in descending order
+- Interactive menu-driven console interface
+- Input validation through the service layer
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Java | Core programming language |
+| JDBC | Connects Java application with MySQL |
+| MySQL | Stores student data |
+| DAO Pattern | Handles database operations |
+| Layered Architecture | Separates model, DAO, service, controller, and utility layers |
+
+## Project Architecture
 
 ```text
-student-management-system/
-├── database/
-│   └── schema.sql
-├── src/main/java/com/studentmanagement/
-│   ├── model/Student.java
-│   ├── util/DBconnection.java
-│   └── Main.java
-├── .gitignore
-├── pom.xml
-└── README.md
+Student-Management-System/
+│
+├── model/
+│   └── Student.java
+│
+├── dao/
+│   ├── StudentDAO.java
+│   └── StudentDAOImpl.java
+│
+├── service/
+│   └── StudentService.java
+│
+├── controller/
+│   └── StudentController.java
+│
+├── util/
+│   └── DBConnection.java
+│
+└── Main.java
 ```
 
-## Requirements
+## Layer Responsibilities
 
-- Java 17 or newer
-- Maven
-- MySQL
+- **Model:** Contains the `Student` POJO class with fields such as ID, name, age, course, and marks.
+- **DAO:** Defines and implements database-related CRUD operations.
+- **Service:** Contains business logic and validates user input.
+- **Controller:** Handles user interaction through the console menu.
+- **Util:** Creates and manages the MySQL database connection.
 
-## Setup
+## Database Setup
 
-1. Clone the repository.
-2. Run `database/schema.sql` in MySQL.
-3. Set your local database credentials:
+1. Install and start MySQL Server.
+2. Create a database named `jdbc_project`.
+
+```sql
+CREATE DATABASE jdbc_project;
+
+USE jdbc_project;
+```
+
+3. Create the `student` table.
+
+```sql
+CREATE TABLE student (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    course VARCHAR(100) NOT NULL,
+    marks DOUBLE NOT NULL
+);
+```
+
+## Configure Database Connection
+
+Open the `DBConnection.java` file and update the database URL, username, and password according to your local MySQL setup.
+
+```java
+String url = "jdbc:mysql://localhost:3306/jdbc_project";
+String username = "root";
+String password = "your_mysql_password";
+```
+
+> Make sure the MySQL JDBC Driver dependency/JAR is added to your project before running the application.
+
+## How to Run
+
+1. Clone this repository:
 
 ```bash
-export DB_URL="jdbc:mysql://127.0.0.1:3306/jdbc_project"
-export DB_USERNAME="root"
-export DB_PASSWORD="your_mysql_password"
+git clone https://github.com/Rahulkus315/Student-Management-System.git
 ```
 
-4. Start the application:
+2. Open the project in your preferred Java IDE, such as IntelliJ IDEA, Eclipse, or VS Code.
 
-```bash
-mvn compile exec:java
+3. Add the MySQL JDBC driver to the project dependencies.
+
+4. Configure your MySQL credentials in `DBConnection.java`.
+
+5. Run the `Main.java` file.
+
+## Example Menu
+
+```text
+===== Student Management System =====
+
+1. Add Student
+2. View All Students
+3. Search Student by ID
+4. Search Student by Name
+5. Update Student
+6. Delete Student
+7. Sort Students by Marks
+8. Exit
+
+Enter your choice:
 ```
 
-The Maven file downloads the MySQL JDBC driver automatically, so no JAR files need to be copied manually.
+## Learning Outcomes
+
+Through this project, I practiced:
+
+- JDBC connectivity with MySQL
+- CRUD operations in Java
+- SQL queries and prepared statements
+- DAO design pattern
+- Layered application architecture
+- Exception handling
+- Input validation
+- Console-based application development
+
+## Author
+
+**Rahul Kushwaha**
+
+Feel free to fork this repository, suggest improvements, or use it for learning purposes.
