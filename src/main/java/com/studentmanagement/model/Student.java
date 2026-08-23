@@ -42,6 +42,14 @@ public class Student {
         this.age = age;
     }
 
+    public double getMarks() {
+        return marks;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+
     public String getCourse() {
         return course;
     }
@@ -50,11 +58,14 @@ public class Student {
         this.course = course;
     }
 
-    public double getMarks() {
-        return marks;
-    }
-
-    public void setMarks(double marks) {
-        this.marks = marks;
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", course='" + course + '\'' +
+                ", marks=" + marks +
+                '}';
     }
 }

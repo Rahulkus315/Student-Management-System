@@ -9,10 +9,7 @@ student-management-system/
 ├── database/
 │   └── schema.sql
 ├── src/main/java/com/studentmanagement/
-│   ├── dao/StudentDao.java
 │   ├── model/Student.java
-│   ├── service/StudentService.java
-│   ├── util/DatabaseConnection.java
 │   └── Main.java
 ├── .gitignore
 ├── pom.xml
@@ -29,8 +26,7 @@ student-management-system/
 
 1. Clone the repository.
 2. Run `database/schema.sql` in MySQL.
-3. Update the connection values in `DatabaseConnection.java`.
-4. Start the application:
+3. Start the application:
 
 ```bash
 mvn compile exec:java
