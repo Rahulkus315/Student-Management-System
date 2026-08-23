@@ -10,6 +10,7 @@ student-management-system/
 │   └── schema.sql
 ├── src/main/java/com/studentmanagement/
 │   ├── model/Student.java
+│   ├── util/DBconnection.java
 │   └── Main.java
 ├── .gitignore
 ├── pom.xml
@@ -26,7 +27,15 @@ student-management-system/
 
 1. Clone the repository.
 2. Run `database/schema.sql` in MySQL.
-3. Start the application:
+3. Set your local database credentials:
+
+```bash
+export DB_URL="jdbc:mysql://127.0.0.1:3306/jdbc_project"
+export DB_USERNAME="root"
+export DB_PASSWORD="your_mysql_password"
+```
+
+4. Start the application:
 
 ```bash
 mvn compile exec:java
