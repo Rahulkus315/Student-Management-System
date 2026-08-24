@@ -4,7 +4,7 @@ import com.studentmanagement.model.Student;
 
 import java.util.List;
 
-interface StudentDAO {
+public interface StudentDAO {
     void addStudent(Student s);
     List<Student> getAllStudent();
     Student getStudentById(int id);
