@@ -27,7 +27,7 @@ public class StudentController {
         System.out.println("6. Delete Student");
         System.out.println("7. Sort by marks");
         System.out.println("8. Exit");
-        System.out.print("Enter your choice");
+        System.out.print("Enter your choice : ");
     }
 
     private void handleChoice(int choice){
@@ -39,25 +39,25 @@ public class StudentController {
                 service.viewAllStudents();
                 break;
             case 3:
-                System.out.println("Enter ID : ");
+                System.out.print("Enter ID : ");
                 service.searchById(sc.nextInt());
                 break;
             case 4:
-                System.out.println("Enter Name : ");
+                System.out.print("Enter Name : ");
                 service.searchByName(sc.nextLine());
                 break;
             case 5:
                 updateStudent();
                 break;
             case 6:
-                System.out.println("Enter ID : ");
+                System.out.print("Enter ID : ");
                 service.deleteStudent(sc.nextInt());
                 break;
             case 7:
                 service.sortByMarks();
                 break;
             case 8:
-                System.out.println("Exit");
+                System.out.print("Exit");
                 System.exit(0);
             default:
                 System.out.println("Invaild input.....");
@@ -65,40 +65,42 @@ public class StudentController {
     }
 
     private void addStudent(){
-        System.out.println("ID : ");
+        System.out.print("ID : ");
         int id = sc.nextInt();
         sc.nextLine();
 
-        System.out.println("Name : ");
+        System.out.print("Name : ");
         String  name = sc.nextLine();
 
-        System.out.println("Age : ");
+        System.out.print("Age : ");
         int age = sc.nextInt();
+        sc.nextLine();
 
-        System.out.println("Course : ");
+        System.out.print("Course : ");
         String course = sc.nextLine();
 
-        System.out.println("Marks : ");
+        System.out.print("Marks : ");
         double marks = sc.nextDouble();
 
         service.addStudent(new Student(id, name, age, course, marks));
     }
 
     private void updateStudent(){
-        System.out.println("ID : ");
+        System.out.print("Enter Student ID to update : ");
         int id = sc.nextInt();
         sc.nextLine();
 
-        System.out.println("Name : ");
+        System.out.print("Name : ");
         String  name = sc.nextLine();
 
-        System.out.println("Age : ");
+        System.out.print("Age : ");
         int age = sc.nextInt();
+        sc.nextLine();
 
-        System.out.println("Course : ");
-        String course = sc.nextLine();
+        System.out.print("Course : ");
+        String course = sc.next();
 
-        System.out.println("Marks : ");
+        System.out.print("Marks : ");
         double marks = sc.nextDouble();
 
         service.updateStudent(new Student(id, name, age, course, marks));

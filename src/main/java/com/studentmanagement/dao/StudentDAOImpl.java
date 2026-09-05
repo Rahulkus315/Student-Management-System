@@ -16,7 +16,7 @@ public class StudentDAOImpl implements StudentDAO{
     public void addStudent(Student s){
         try {
             con = DBconnection.getConnection();
-            String Query = "INSERT INTO students VALUES(?, ?, ?, ?, ?)";
+            String Query = "INSERT INTO students(id, name, age, course, marks) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(Query);
             ps.setInt(1,s.getId());
             ps.setString(2,s.getName());
@@ -36,7 +36,7 @@ public class StudentDAOImpl implements StudentDAO{
         List<Student> list = new ArrayList<>();
         try {
             con = DBconnection.getConnection();
-            String query = "SELECT * FROM student";
+            String query = "SELECT * FROM students";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -57,8 +57,10 @@ public class StudentDAOImpl implements StudentDAO{
     // get Student by id
     public Student getStudentById(int id){
         try {
+            con = DBconnection.getConnection();
             String query = "SELECT * FROM students WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 return new Student(
@@ -69,7 +71,7 @@ public class StudentDAOImpl implements StudentDAO{
                         rs.getDouble("marks")
                 );
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -82,11 +84,11 @@ public class StudentDAOImpl implements StudentDAO{
     public List<Student> searchByName(String name) {
         List<Student> list = new ArrayList<>();
         try{
-            String query = "SELECT * RROM students WHERE name LIKE ?";
+            String query = "SELECT * FROM students WHERE name LIKE ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,"%" +  name + "%");
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            while (rs.next()){
                 list.add(new Student(
                    rs.getInt("id"),
                    rs.getString("name"),
@@ -109,11 +111,11 @@ public class StudentDAOImpl implements StudentDAO{
             con = DBconnection.getConnection();
             String query = "UPDATE students SET name = ?, age = ?, course = ?, marks = ? WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, s.getId());
-            ps.setString(2, s.getName());
-            ps.setInt(3, s.getAge());
-            ps.setString(4, s.getCourse());
-            ps.setDouble(5, s.getMarks());
+            ps.setString(1, s.getName());
+            ps.setInt(2, s.getAge());
+            ps.setString(3, s.getCourse());
+            ps.setDouble(4, s.getMarks());
+            ps.setInt(5, s.getId());
             ps.executeUpdate();
             System.out.println("Student Updated");
         } catch (Exception e) {
@@ -127,12 +129,17 @@ public class StudentDAOImpl implements StudentDAO{
     public void deleteStudent(int id) {
         try {
             con = DBconnection.getConnection();
-            String query = "DELETE FROM student WHERE ID = ?";
+
+            String query = "DELETE FROM students WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(query);
+
             ps.setInt(1, id);
+
             ps.executeUpdate();
+
             System.out.println("Student Deleted!");
-        }catch (Exception e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
