@@ -61,15 +61,15 @@ Student-Management-System/
 ## Database Setup
 
 1. Install and start MySQL Server.
-2. Create a database named `jdbc_project`.
+2. Create a database named `JDBC_demo`.
 
 ```sql
-CREATE DATABASE jdbc_project;
+CREATE DATABASE JDBC_demo;
 
-USE jdbc_project;
+USE JDBC_demo;
 ```
 
-3. Create the `student` table.
+3. Create the `students` table.
 
 ```sql
 CREATE TABLE student (
@@ -79,6 +79,23 @@ CREATE TABLE student (
     course VARCHAR(100) NOT NULL,
     marks DOUBLE NOT NULL
 );
+'full code'..
+'CREATE DATABASE IF NOT EXISTS JDBC_demo;
+USE JDBC_demo;
+CREATE TABLE IF NOT EXISTS students(
+id INT PRIMARY KEY ,
+name VARCHAR(100) NOT NULL,
+age INT NOT NULL,
+course VARCHAR(100),
+marks DOUBLE NOT NULL
+);
+INSERT INTO students(id, name, age, course, marks) VALUES
+(1, "Rahul", 21, "CSE", 89.9),
+(2, "Krishan Raj Singh", 21, "CSE", 69.0);
+
+select * from students;
+
+'
 ```
 
 ## Configure Database Connection
